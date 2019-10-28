@@ -48,13 +48,33 @@ public class Customer {
         }
 
         //푸터 행 추가
-        result += "누적 대여료 : " + totalAmount + "\n";
-        result += "적립 포인트 : " + frequentRenterPoints;
+        result += "누적 대여료 : " + getTotalCharge() + "\n";
+        result += "적립 포인트 : " + getTotalFrequentRenterPoints();
         return result;
     }
 
     //Rental에 새롭게 작성된 getChage() 메소드로 처리를 넘김
     private double amountFor(Rental aRental) {
         return aRental.getCharge();
+    }
+
+    private double getTotalCharge() {
+        double result = 0;
+        Enumeration rentals = this.rentals.elements();
+        while (rentals.hasMoreElements()) {
+            Rental each = (Rental) rentals.nextElement();
+            result += each.getCharge();
+        }
+        return result;
+    }
+
+    private int getTotalFrequentRenterPoints() {
+        int result = 0;
+        Enumeration rentals = this.rentals.elements();
+        while (rentals.hasMoreElements()) {
+            Rental each = (Rental) rentals.nextElement();
+            result += each.getFrequentRenterPoints();
+        }
+        return result;
     }
 }
