@@ -35,12 +35,8 @@ public class Customer {
             //코드로 인해 변경되지 않음 (매개변수로 전달할 수 있음
             Rental each = enumerationRentals.nextElement();
 
-            //적립 포인트 1포인트 증가
-            frequentRenterPoints++;
-
-            //최신물을 이틀 이상 대여하면 보너스 포인트 지급
-            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1)
-                frequentRenterPoints++;
+            //경우에 따른 적립 포인트 지급 함수를 호출
+            frequentRenterPoints += each.getFrequentRenterPoints();
 
             //이번에 대여하는 비디오 정보와 대여로를 출력
             //임시변수를 메서드 호출로 전환 기법을 사용해서 thisAmount 변수를 삭제 후 메소드로 변환
