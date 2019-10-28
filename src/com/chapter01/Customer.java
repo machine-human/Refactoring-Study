@@ -35,9 +35,6 @@ public class Customer {
             //코드로 인해 변경되지 않음 (매개변수로 전달할 수 있음
             Rental each = enumerationRentals.nextElement();
 
-            //비디오 종류별 대여료 계산 함수를 호출
-            thisAmount = amountFor(each);
-
             //적립 포인트 1포인트 증가
             frequentRenterPoints++;
 
