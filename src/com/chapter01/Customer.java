@@ -32,15 +32,8 @@ public class Customer {
         String result = getName() + " 고객님의 대여 기록 \n";
 
         while (enumerationRentals.hasMoreElements()) {
-            //코드로 인해 변경 됨
-            //변경되는 변수는 더 주의해야 함
-            //변경되는 변수가 하나뿐이라면 그 변수를 반환할 수 있음
-            double thisAmount = 0;
             //코드로 인해 변경되지 않음 (매개변수로 전달할 수 있음
             Rental each = enumerationRentals.nextElement();
-
-            //비디오 종류별 대여료 계산 함수를 호출
-            thisAmount = amountFor(each);
 
             //적립 포인트 1포인트 증가
             frequentRenterPoints++;
@@ -50,10 +43,12 @@ public class Customer {
                 frequentRenterPoints++;
 
             //이번에 대여하는 비디오 정보와 대여로를 출력
-            result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
+            //임시변수를 메서드 호출로 전환 기법을 사용해서 thisAmount 변수를 삭제 후 메소드로 변환
+            //thisAmount -> each.getChar() 메소드
+            result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "\n";
 
             //현재까지 누적된 총 대여료
-            totalAmount += thisAmount;
+            totalAmount += each.getCharge();
         }
 
         //푸터 행 추가
@@ -62,24 +57,8 @@ public class Customer {
         return result;
     }
 
-    //비디오 종류별 대여료 계산 기능을 빼내어 별도의 함수로 작성
+    //Rental에 새롭게 작성된 getChage() 메소드로 처리를 넘김
     private double amountFor(Rental aRental) {
-        double result = 0;
-        switch (aRental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                result += 2;
-                if (aRental.getDaysRented() > 2)
-                    result += (aRental.getDaysRented() - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                result += aRental.getDaysRented() * 3;
-                break;
-            case Movie.CHILDRENS:
-                result += 1.5;
-                if (aRental.getDaysRented() > 3)
-                    result += (aRental.getDaysRented() - 3) * 1.5;
-                break;
-        }
-        return result;
+        return aRental.getCharge();
     }
 }
