@@ -39,22 +39,8 @@ public class Customer {
             //코드로 인해 변경되지 않음 (매개변수로 전달할 수 있음
             Rental each = enumerationRentals.nextElement();
 
-            //비디오 종류별 대여료 계산
-            switch (each.getMovie().getPriceCode()) {
-                case Movie.REGULAR:
-                    thisAmount += 2;
-                    if (each.getDaysRented() > 2)
-                        thisAmount += (each.getDaysRented() - 2) * 1.5;
-                    break;
-                case Movie.NEW_RELEASE:
-                    thisAmount += each.getDaysRented() * 3;
-                    break;
-                case Movie.CHILDRENS:
-                    thisAmount += 1.5;
-                    if (each.getDaysRented() > 3)
-                        thisAmount += (each.getDaysRented() - 3) * 1.5;
-                    break;
-            }
+            //비디오 종류별 대여료 계산 함수를 호출
+            thisAmount = amountFor(each);
 
             //적립 포인트 1포인트 증가
             frequentRenterPoints++;
@@ -73,6 +59,27 @@ public class Customer {
         //푸터 행 추가
         result += "누적 대여료 : " + totalAmount + "\n";
         result += "적립 포인트 : " + frequentRenterPoints;
+        return result;
+    }
+
+    //비디오 종류별 대여료 계산 기능을 빼내어 별도의 함수로 작성
+    private double amountFor(Rental aRental) {
+        double result = 0;
+        switch (aRental.getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                result += 2;
+                if (aRental.getDaysRented() > 2)
+                    result += (aRental.getDaysRented() - 2) * 1.5;
+                break;
+            case Movie.NEW_RELEASE:
+                result += aRental.getDaysRented() * 3;
+                break;
+            case Movie.CHILDRENS:
+                result += 1.5;
+                if (aRental.getDaysRented() > 3)
+                    result += (aRental.getDaysRented() - 3) * 1.5;
+                break;
+        }
         return result;
     }
 }
