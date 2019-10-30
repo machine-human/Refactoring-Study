@@ -197,3 +197,11 @@ public class Customer {
 
 - 리팩토링할 코드 부분에 대한 신뢰도 높은 각종 테스트를 작성
 - 긴 메서드를 보면 작은 부분들로 쪼갤 수 있는지 살펴본다
+=======
+# Refactoring-Study
+리팩토링 - 마틴파일러(저)를 공부하며 정리하는 저장소입니다.
+
+</br>
+
+# Chapter List
+- [CHAPTER 01 맛보기 예제](https://github.com/machine-human/Refactoring-Study/tree/chapter-01)
