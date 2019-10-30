@@ -10,19 +10,31 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private String title;
-    private int priceCode;
+    private Price price;
 
     public Movie(String title, int priceCode) {
         this.title = title;
-        this.priceCode = priceCode;
+        setPriceCode(priceCode);
     }
 
     public int getPriceCode() {
-        return priceCode;
+        return price.getPriceCode();
     }
 
     public void setPriceCode(int arg) {
-        this.priceCode = arg;
+        switch (arg) {
+            case REGULAR:
+                price = new RegularPrice();
+                break;
+            case CHILDRENS:
+                price = new ChildrensPrice();
+                break;
+            case NEW_RELEASE:
+                price = new NewReleasePrice();
+                break;
+            default:
+                throw new IllegalArgumentException("가격 코드가 잘못됐습니다.");
+        }
     }
 
     public String getTitle() {
@@ -31,31 +43,12 @@ public class Movie {
 
     //비디오 종류별 대여료 계산 기능을 빼내어 별도의 함수로 작성
     public double getCharge(int daysRented) {
-        double result = 0;
-        switch (getPriceCode()) {
-            case Movie.REGULAR:
-                result += 2;
-                if (daysRented > 2)
-                    result += (daysRented - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                result += daysRented * 3;
-                break;
-            case Movie.CHILDRENS:
-                result += 1.5;
-                if (daysRented > 3)
-                    result += (daysRented - 3) * 1.5;
-                break;
-        }
-        return result;
+        return price.getCharge(daysRented);
     }
 
     //최신물을 이틀 이상 대여하면 2포인트 지급하고 그 외엔 1포인트 지급하는 코드를
     //빼내 getFrequentRenterPoints 메서드로 만들고 이 Rental 클래스로 옮겼다.
     int getFrequentRenterPoints(int daysRented) {
-        if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1)
-            return 2;
-        else
-            return 1;
+        return price.getFrequentRenterPoints(daysRented);
     }
 }
