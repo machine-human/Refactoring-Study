@@ -5,3 +5,5 @@
 
 # Chapter List
 - [CHAPTER 01 맛보기 예제](https://github.com/machine-human/Refactoring-Study/tree/chapter-01)
+- [CHAPTER 01 맛보기 예제](https://github.com/machine-human/Refactoring-Study/tree/chapter-02)
+- [CHAPTER 01 맛보기 예제](https://github.com/machine-human/Refactoring-Study/tree/chapter-03)
