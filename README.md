@@ -1,20 +1,20 @@
 # 테스트 작성
 리팩토링을 실시하기 위한 필수 전제조건은 반드시 견고한 테스트를 해야 한다는 것
 </br>
+</br>
 ## JUnit 테스트 프레임워크
 
 [프레임워크 구조]
 
-![junit_architecture](https://raw.githubusercontent.com/machine-human/Refactoring-Study/master/src/image/junit_architecture.png)
+![junit_architecture](https://raw.githubusercontent.com/machine-human/Refactoring-Study/chapter-04/src/image/junit_architecture.PNG)
 
-
+</br>
 [특이 사항]
 
 - 테스트가 들어 있는 모든 클래스 안에는 JUnit의 TestCase 클래스가 반드시 들어 있어야 함
 - 실패 뿐 아니라 에러도 잡아냄
 
-
-
+</br>
 [소스 코드]
 
 - 기본 소스
@@ -67,9 +67,9 @@
 
 - 결과 (성공)
 
-![test_success](https://raw.githubusercontent.com/machine-human/Refactoring-Study/master/src/image/test_success.png)
+![test_success](https://raw.githubusercontent.com/machine-human/Refactoring-Study/chapter-04/src/image/test_success.PNG)
 
-
+</br>
 
 - 고의적인 오류 (예 - 실패)
   - 테스트가 실제로 수행되는지 스스로 입증하고 실제로 테스트하기 위함
@@ -85,13 +85,12 @@ public void testRead() throws IOException
 }
 ```
 
-
-
 - 결과 
 
-![test_fail](https://raw.githubusercontent.com/machine-human/Refactoring-Study/master/src/image/test_fail.png)
+![test_fail](https://raw.githubusercontent.com/machine-human/Refactoring-Study/chapter-04/src/image/test_fail.PNG)
 
 
+</br>
 
 - 고의적인 오류 (예 - 에러)
 
@@ -108,8 +107,6 @@ public void testRead() throws IOException
   }
   ```
 
-
-
 - 결과
 
-![test_error](https://raw.githubusercontent.com/machine-human/Refactoring-Study/master/src/image/test_error.png)
+![test_error](https://raw.githubusercontent.com/machine-human/Refactoring-Study/chapter-04/src/image/test_error.PNG)
