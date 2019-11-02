@@ -14,7 +14,7 @@
 
 #### [클래스 다이어그램]
 
-![class_diagram_01](https://raw.githubusercontent.com/machine-human/Refactoring-Study/master/src/image/class_diagram_01.png)
+![class_diagram_01](https://raw.githubusercontent.com/machine-human/Refactoring-Study/chapter-01/src/image/class_diagram_01.png)
 
 </br>
 
