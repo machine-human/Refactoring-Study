@@ -1,0 +1,324 @@
+# 메서드 추출
+
+###### Extract Method
+
+어떤 코드를 그룹으로 묶어도 되겠다고 판단될 땐 그 코드를 빼내어 목적을 잘 나타내는 직관적 이름의 메서드로 만들자
+</br>
+</br>
+
+[보기]
+
+- 변경 전
+
+  ```java
+  void printDetails(double amount) {    
+      
+      printBanner();  
+      
+      //세부 정보 출력    
+      System.out.println("name:" + name);    
+      System.out.println("amount:" + amount);
+  }
+  ```
+</br>
+
+- 변경 후
+
+  ```java
+  void printDetails(double amount) {    
+      
+      printBanner();    
+      printDetails(amount);
+  }
+  
+  void printDetails(double amount) {    
+      System.out.println("name:" + name);    
+      System.out.println("amount:" + amount);
+  }
+  ```
+</br>
+
+[방법]
+
+1. 목적에 부합하는 이름의 새 메서드를 생성 
+   (기능을 타나내는 이름이어야 함)
+2. 기존 메서드에서 빼낸 코드를 새로 생성한 메서드로 복사
+3. 빼낸 코드에서 기존 메서드의 모든 지역변수 참조를 찾음
+   (새로 생성한 메서드의 지역변수나 매개변수로 사용할 것)
+4. 빼낸 코드 안에 사용되는 임시변수가 있다면 새로 생성한 메서드 안에 임시변수로 선언
+5. 빼낸 코드에서 읽어들인 지역변수를 대상 메서드에 매개변수로 전달
+6. 모든 지역변수 처리를 완료했으면 컴파일 실시
+7. 원본 메서드 안에 있는 빼낸 코드 부분을 새로 생성한 메서드 호출로 수정
+   (대상 메서드로 임시변수를 옮겼으면 그 임시변수가 원본 코드 외부에 선언되어 있었는지 검사해서, 그렇다면 대상 코드에서는 그 선언 부분을 삭제)
+8. 컴파일과 테스트 실시
+</br>
+
+[예제 1 - 지역변수 사용 안 함]
+- 변경 전
+
+  ```java
+  public void printOwing() {    
+      Enumeration e = ordres.elements();    
+      double outstanding = 0.0;    
+      
+      // 배너 출력    
+      System.out.println("**************************");
+      System.out.println("******** 고객 외상 ********");   
+      System.out.println("**************************");    
+      
+      // 외상액 계산    
+      while (e.hasMoreElements()) {        
+          Order each = (Order) e.nextElement();        
+          outstanding += each.getAmount();    
+      }    
+      
+      // 세부 내역 출력    
+      System.out.println("고객명: " + name);    
+      System.out.println("외상액: " + outstanding);
+  }
+  ```
+</br>
+
+- 변경 후
+
+  - 매너 출력 부분 메서드로 추출
+  
+  ```java
+  public void printOwing() {    
+      Enumeration e = ordres.elements();    
+      double outstanding = 0.0;    
+      printBanner();    
+      
+      // 외상액 계산    
+      while (e.hasMoreElements()) {        
+          Order each = (Order) e.nextElement();        
+          outstanding += each.getAmount();    
+      }    
+      
+      // 세부 내역 출력    
+      System.out.println("고객명: " + name);    
+      System.out.println("외상액: " + outstanding);
+  }
+  
+  private void printBanner() {    
+      // 배너 출력    
+      System.out.println("**************************");
+      System.out.println("******** 고객 외상 ********");
+      System.out.println("**************************");
+  }
+  ```
+</br>
+
+[예제 2 - 지역변수 사용]
+
+- 변경 전
+
+  ```java
+  public void printOwing() {
+      Enumeration e = ordres.elements(); 
+      double outstanding = 0.0;   
+      printBanner();   
+      
+      // 외상액 계산   
+      while (e.hasMoreElements()) {   
+          Order each = (Order) e.nextElement();    
+          outstanding += each.getAmount();   
+      }  
+      
+      // 세부 내역 출력   
+      System.out.println("고객명: " + name);  
+      System.out.println("외상액: " + outstanding);
+  }
+  
+  private void printBanner() {   
+      // 배너 출력   
+      System.out.println("**************************");  
+      System.out.println("******** 고객 외상 ********");   
+      System.out.println("**************************");
+  }
+  ```
+</br>
+
+- 변경 후
+
+  - 세부 내역 출력 부분 메서드로 추출
+
+  ```java
+  public void printOwing() {   
+      Enumeration e = ordres.elements(); 
+      double outstanding = 0.0;    
+      printBanner();    
+      
+      // 외상액 계산 
+      while (e.hasMoreElements()) {    
+          Order each = (Order) e.nextElement();    
+          outstanding += each.getAmount();   
+      }   
+      printDetails(outstanding);
+  }
+  
+  private void printBanner() {   
+      // 배너 출력 
+      System.out.println("**************************"); 
+      System.out.println("******** 고객 외상 ********");   
+      System.out.println("**************************");
+  }
+  
+  private void printDetails(double outstanding) {   
+      // 세부 내역 출력   
+      System.out.println("고객명: " + name); 
+      System.out.println("외상액: " + outstanding);
+  }
+  ```
+</br>
+
+[예제 3 - 지역변수를 다시 대입]
+
+- 변경 전
+
+  ```java
+  public void printOwing() {  
+      Enumeration e = ordres.elements();   
+      double outstanding = 0.0;  
+      printBanner();   
+      
+      // 외상액 계산   
+      while (e.hasMoreElements()) {   
+          Order each = (Order) e.nextElement();     
+          outstanding += each.getAmount(); 
+      }  
+      printDetails(outstanding);
+  }
+  
+  private void printBanner() {  
+      // 배너 출력
+      System.out.println("**************************"); 
+      System.out.println("******** 고객 외상 ********");   
+      System.out.println("**************************");
+  }
+  
+  void printDetails(double outstanding) {  
+      // 세부 내역 출력 
+      System.out.println("고객명: " + name); 
+      System.out.println("외상액: " + outstanding);
+  }
+  ```
+</br>
+
+- 변경 후
+
+  - 외상액 계산 부분 메서드로 추출
+
+  ```java
+  public void printOwing() {  
+      double outstanding = getOutstanding();
+      printBanner();   
+      printDetails(outstanding);
+  }
+  
+  private void printBanner() {   
+      // 배너 출력  
+      System.out.println("**************************"); 
+      System.out.println("******** 고객 외상 ********");   
+      System.out.println("**************************");
+  }
+  
+  private void printDetails(double outstanding) { 
+      // 세부 내역 출력 
+      System.out.println("고객명: " + name);  
+      System.out.println("외상액: " + outstanding);
+  }
+  
+  private double getOutstanding() {  
+      Enumeration e = ordres.elements();   
+      double result = 0.0;    
+      
+      // 외상액 계산   
+      while (e.hasMoreElements()) {   
+          Order each = (Order) e.nextElement();  
+          result += each.getAmount();  
+      }  
+      return result;
+  }
+  ```
+</br>
+
+[예제 4 - 임시 변수에 더 복잡한 작업이 일어날 때]
+
+- 변경 전
+
+  ```java
+  public void printOwing(double previousAmount) {   
+      Enumeration e = ordres.elements();
+      double outstanding = previousAmount * 1.2;   
+      printBanner();   
+      
+      // 외상액 계산   
+      while (e.hasMoreElements()) {    
+          Order each = (Order) e.nextElement();   
+          outstanding += each.getAmount(); 
+      }  
+      printDetails(outstanding);
+  }
+  
+  private void printBanner() {  
+      // 배너 출력  
+      System.out.println("**************************");
+      System.out.println("******** 고객 외상 ********");   
+      System.out.println("**************************");
+  }
+  
+  private void printDetails(double outstanding) {  
+      // 세부 내역 출력 
+      System.out.println("고객명: " + name); 
+      System.out.println("외상액: " + outstanding);
+  }
+  
+  private double getOutstanding() { 
+      Enumeration e = ordres.elements();   
+      double result = 0.0; 
+      
+      // 외상액 계산    
+      while (e.hasMoreElements()) {  
+          Order each = (Order) e.nextElement();  
+          result += each.getAmount();  
+      }  
+      return result;
+  }
+  ```
+</br>
+
+- 변경 후
+
+  ```java
+  public void printOwing(double previousAmount) { 
+      printBanner();   
+      double outstanding = getOutstanding(previousAmount * 1.2); 
+      printDetails(outstanding);
+  }
+  
+  private void printBanner() {  
+      // 배너 출력  
+      System.out.println("**************************");   
+      System.out.println("******** 고객 외상 ********");   
+      System.out.println("**************************");
+  }
+  
+  private void printDetails(double outstanding) {  
+      // 세부 내역 출력  
+      System.out.println("고객명: " + name);  
+      System.out.println("외상액: " + outstanding);
+  }
+  
+  private double getOutstanding(double initialValue) { 
+      double result = initialValue;   
+      Enumeration e = ordres.elements();   
+      
+      // 외상액 계산  
+      while (e.hasMoreElements()) {  
+          Order each = (Order) e.nextElement(); 
+          result += each.getAmount();   
+      }   
+      return result;
+  }
+  ```
