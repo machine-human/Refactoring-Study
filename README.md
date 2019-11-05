@@ -9,3 +9,4 @@
 - [CHAPTER 03 코드의 구린내](https://github.com/machine-human/Refactoring-Study/tree/chapter-03)
 - [CHAPTER 04 테스트 작성](https://github.com/machine-human/Refactoring-Study/tree/chapter-04)
 - [CHAPTER 06 메서드 정리](https://github.com/machine-human/Refactoring-Study/tree/chapter-06)
+- [CHAPTER 07 객체 간의 기능 이동](https://github.com/machine-human/Refactoring-Study/tree/cahpter-07)
