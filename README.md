@@ -10,3 +10,5 @@
 - [CHAPTER 04 테스트 작성](https://github.com/machine-human/Refactoring-Study/tree/chapter-04)
 - [CHAPTER 06 메서드 정리](https://github.com/machine-human/Refactoring-Study/tree/chapter-06)
 - [CHAPTER 07 객체 간의 기능 이동](https://github.com/machine-human/Refactoring-Study/tree/cahpter-07)
+- CHAPTER 08 데이터 체계화 (추가 예정)
+- [CHAPTER 09 조건문 간결화](https://github.com/machine-human/Refactoring-Study/tree/chapter-09)
