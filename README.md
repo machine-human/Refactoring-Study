@@ -4,8 +4,8 @@
 
 </br>
 
-# Chapter List	# 리팩토링 기법
-- 아래 목록 클릭시 정리된 md 파일로 이동되며 전체 소스는 chapter07 패키지에 포함되어 있습니다.
+# 리팩토링 기법
+- 아래 목록 클릭시 정리된 md 파일로 이동되며 전체 소스는 chapter09 패키지에 포함되어 있습니다.
 - [조건문 쪼개기 - Decompose Conditional](https://github.com/machine-human/Refactoring-Study/blob/master/src/com/chapter09/decomposeconditional/%EC%A1%B0%EA%B1%B4%EB%AC%B8%20%EC%AA%BC%EA%B0%9C%EA%B8%B0.md)
 - [중복 조건식 통합 - Consolidate Conditional Expression](https://github.com/machine-human/Refactoring-Study/blob/master/src/com/chapter09/consolidateconditionalexpression/%EC%A4%91%EB%B3%B5%20%EC%A1%B0%EA%B1%B4%EC%8B%9D%20%ED%86%B5%ED%95%A9.md)
 - [조건문의 공통 실행 코드 빼내기 - Consolidate Duplicate Conditional Fragments](https://github.com/machine-human/Refactoring-Study/blob/master/src/com/chapter09/consolidateduplicateconditionalFragments/%EC%A1%B0%EA%B1%B4%EB%AC%B8%EC%9D%98%20%EA%B3%B5%ED%86%B5%20%EC%8B%A4%ED%96%89%20%EC%BD%94%EB%93%9C%20%EB%B9%BC%EB%82%B4%EA%B8%B0.md)
