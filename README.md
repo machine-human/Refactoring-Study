@@ -1,5 +1,7 @@
 # Refactoring-Study
-리팩토링 - 마틴파일러(저)를 공부하며 정리하는 저장소입니다.
+리팩토링 - [마틴파일러(저)](https://book.naver.com/bookdb/book_detail.nhn?bid=7047630)를 공부하며 정리하는 저장소입니다.
+
+
 
 </br>
 
