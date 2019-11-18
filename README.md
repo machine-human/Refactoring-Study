@@ -15,3 +15,4 @@
 - CHAPTER 08 데이터 체계화 (추가 예정)
 - [CHAPTER 09 조건문 간결화](https://github.com/machine-human/Refactoring-Study/tree/chapter-09)
 - [CHAPTER 10 메서드 호출 단순화](https://github.com/machine-human/Refactoring-Study/tree/chapter-10)
+- [CHAPTER 11 일반화 처리](https://github.com/machine-human/Refactoring-Study/tree/chapter-11)
